@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 // MasterPage
 export const Layout = () => {
    return (
@@ -8,18 +8,18 @@ export const Layout = () => {
 
             {/*Utilizar Navlink para ocupar en el hosting  */}
             <nav className="mt-10">
-               <a
+               <Link
                   className="text-white text-2xl block mt-2 hover:text-blue-300"
-                  href="/clientes"
+                  to="/clientes"
                >
                   Persona
-               </a>
-               <a
+               </Link>
+               <Link
                   className="text-white text-2xl block mt-2 hover:text-blue-300"
-                  href="/clientes/nuevo"
+                  to="/clientes/nuevo"
                >
                   Nueva Persona
-               </a>
+               </Link>
             </nav>
          </div>
 
