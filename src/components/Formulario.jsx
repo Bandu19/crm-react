@@ -22,11 +22,10 @@ export const Formulario = () => {
       pedad: Yup.number()
 
          .required("La Edad es Obligatoria")
-         // no funciona hay que checar
-         .integer("Edad no válido")
+         .integer("Solo numeros enteros")
          .min(1, "selecciona un valor mas de 1")
          .max(100, "selecciona un valor menor que 100")
-         // La edad no es valida
+         //El typeError sirve para editar el mensaje por default
          .typeError("La Edad no es valida"),
 
       ptelefono: Yup.number()
@@ -35,9 +34,25 @@ export const Formulario = () => {
          .typeError("El Número no es válido"),
    });
 
-   const handleSubmit = (valores) => {
+   const handleSubmit = async (valores) => {
       // Enviar datos a la API dentro de esta funcion.
-      console.log(valores);
+      // console.log(valores);
+
+      try {
+         const url = "http://localhost:8080/Persona/guardaPersona";
+         const respuesta = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(valores),
+            headers: {
+               "Content-Type": "application/json",
+            },
+         });
+         console.log(respuesta);
+         const resultado = await respuesta.json();
+         console.log(resultado);
+      } catch (error) {
+         console.log(error);
+      }
    };
    return (
       <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
@@ -137,11 +152,9 @@ export const Formulario = () => {
                         </label>
                         <Field
                            id="edad"
-                           type="number"
+                           type="text"
                            className="mt-2 block w-full p-3 bg-gray-200"
                            placeholder="Edad de la persona"
-                           min="0"
-                           max="100"
                            name="pedad"
                         />
                         {
