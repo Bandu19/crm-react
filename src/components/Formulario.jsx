@@ -10,6 +10,29 @@ export const Formulario = () => {
          .min(4, "El Nombre es muy corto")
          .max(20, "El Nombre es muy largo")
          .required("El Nombre de la Persona es Obligatorio"),
+
+      papellidop: Yup.string()
+         .min(2, "El Apellido es muy corto")
+         .required("El Apellido paterno es Obligatorio"),
+
+      papellidom: Yup.string()
+         .min(2, "El Apellido es muy corto")
+         .required("El Apellido materno es Obligatorio"),
+
+      pedad: Yup.number()
+
+         .required("La Edad es Obligatoria")
+         // no funciona hay que checar
+         .integer("Edad no válido")
+         .min(1, "selecciona un valor mas de 1")
+         .max(100, "selecciona un valor menor que 100")
+         // La edad no es valida
+         .typeError("La Edad no es valida"),
+
+      ptelefono: Yup.number()
+         .integer("Numero no válido")
+         .positive("Numero no valido")
+         .typeError("El Número no es válido"),
    });
 
    const handleSubmit = (valores) => {
@@ -37,8 +60,8 @@ export const Formulario = () => {
          >
             {/* Errors es parte de la propiedad que damos a la hora de  */}
             {({ errors, touched }) => {
-               console.log(errors);
-               console.log(touched);
+               // console.log(errors);
+               // console.log(touched);
                return (
                   <Form className="mt-5">
                      {/*Primer Campo  */}
@@ -74,6 +97,14 @@ export const Formulario = () => {
                            placeholder="Primer apellido de la persona"
                            name="papellidop"
                         />
+                        {
+                           //
+                           errors.papellidop && touched.papellidop ? (
+                              //
+                              <Alerta>{errors.papellidop} </Alerta>
+                           ) : //
+                           null
+                        }
                      </div>
 
                      {/*Tercer Campo*/}
@@ -89,6 +120,14 @@ export const Formulario = () => {
                            placeholder="Segundo apellido de la persona"
                            name="papellidom"
                         />
+                        {
+                           //
+                           errors.papellidom && touched.papellidom ? (
+                              //
+                              <Alerta>{errors.papellidom} </Alerta>
+                           ) : //
+                           null
+                        }
                      </div>
                      {/*Cuarto Campo*/}
 
@@ -105,6 +144,14 @@ export const Formulario = () => {
                            max="100"
                            name="pedad"
                         />
+                        {
+                           //
+                           errors.pedad && touched.pedad ? (
+                              //
+                              <Alerta>{errors.pedad} </Alerta>
+                           ) : //
+                           null
+                        }
                      </div>
                      {/*Quinto Campo*/}
 
@@ -119,6 +166,15 @@ export const Formulario = () => {
                            placeholder="Numero de Telefono de la persona"
                            name="ptelefono"
                         />
+
+                        {
+                           //
+                           errors.ptelefono && touched.ptelefono ? (
+                              //
+                              <Alerta>{errors.ptelefono} </Alerta>
+                           ) : //
+                           null
+                        }
                      </div>
 
                      <input
