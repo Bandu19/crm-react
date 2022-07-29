@@ -1,9 +1,14 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Alerta } from "./Alerta";
 
 export const Formulario = () => {
+   // Importando useNavigate
+
+   const navigate = useNavigate();
+
    // Utilizando Yup
    const nuevoClienteShema = Yup.object().shape({
       pnombre: Yup.string()
@@ -47,9 +52,14 @@ export const Formulario = () => {
                "Content-Type": "application/json",
             },
          });
-         console.log(respuesta);
-         const resultado = await respuesta.json();
-         console.log(resultado);
+         // Para checar el estado de tu API
+         // console.log(respuesta); IMPORTANTE
+         // const resultado = await respuesta.json();
+         // console.log(resultado); IMPORTANTE
+
+         await respuesta.json();
+         navigate("/clientes");
+         return;
       } catch (error) {
          console.log(error);
       }
@@ -68,8 +78,12 @@ export const Formulario = () => {
                pedad: "",
                ptelefono: "",
             }}
-            onSubmit={(values) => {
-               handleSubmit(values);
+            // Dentro de este metodo de onSubmit hace que se se envien los datos(API).
+            // El resetForm hace que se resetea el formulario que tenemos en Formik
+            onSubmit={async (values, { resetForm }) => {
+               await handleSubmit(values);
+
+               resetForm();
             }}
             validationSchema={nuevoClienteShema}
          >
