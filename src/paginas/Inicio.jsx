@@ -23,7 +23,7 @@ export const Inicio = () => {
    return (
       <>
          <h1 className="font-black text-4xl text-blue-900">Personas</h1>
-         <p className="mt-3">Administra tus clientes</p>
+         <p className="mt-3">Administra tus Lista de Personas</p>
 
          <table className="w-full mt-5 table-auto shadow bg-white">
             <thead className="bg-blue-800 text-white">
