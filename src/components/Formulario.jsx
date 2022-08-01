@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Alerta } from "./Alerta";
 
-export const Formulario = () => {
+const Formulario = ({ persona }) => {
    // Importando useNavigate
 
    const navigate = useNavigate();
@@ -72,12 +72,13 @@ export const Formulario = () => {
 
          <Formik
             initialValues={{
-               pnombre: "",
-               papellidop: "",
-               papellidom: "",
-               pedad: "",
-               ptelefono: "",
+               pnombre: persona?.pnombre ?? "", // persona.pnombre ? persona.pnombre :  "";
+               papellidop: persona?.papellidop ?? "",
+               papellidom: persona?.papellidom ?? "",
+               pedad: persona?.pedad ?? "",
+               ptelefono: persona?.ptelefono ?? "",
             }}
+            enableReinitialize={true}
             // Dentro de este metodo de onSubmit hace que se se envien los datos(API).
             // El resetForm hace que se resetea el formulario que tenemos en Formik
             onSubmit={async (values, { resetForm }) => {
@@ -216,3 +217,9 @@ export const Formulario = () => {
       </div>
    );
 };
+
+Formulario.defaultProps = {
+   persona: {},
+};
+
+export { Formulario };

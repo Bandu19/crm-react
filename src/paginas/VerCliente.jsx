@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Spinner } from "../components";
 
 export const VerCliente = () => {
+   // Llenar con un objeto vacio.
    const [personas, setPersonas] = useState({});
+
+   const [cargando, setCargando] = useState(true);
 
    const { pcvepersona, pnombre, papellidop, papellidom, pedad, ptelefono } = personas;
 
@@ -16,17 +20,27 @@ export const VerCliente = () => {
             const url = `http://localhost:8080/Persona/getOne/${id}`;
             const respuesta = await fetch(url);
             const resultado = await respuesta.json();
-            console.log(resultado);
+            // console.log(resultado);
             setPersonas(resultado);
          } catch (error) {
             console.log(error);
          }
+         setTimeout(() => {
+            setCargando(!cargando);
+         }, 2000);
       };
       obtenerClienteAPI();
    }, []);
 
+   console.log(cargando);
+
    return (
-      <>
+      //
+      cargando ? (
+         <Spinner />
+      ) : Object.keys(personas).length == 15 ? (
+         <p>No Hay Resultados</p>
+      ) : (
          <div>
             <h1 className="font-black text-4xl text-blue-900">Ver Persona: {pnombre}</h1>
             <p className="mt-3">Informacion de la Persona</p>
@@ -79,6 +93,6 @@ export const VerCliente = () => {
                )
             }
          </div>
-      </>
+      )
    );
 };
