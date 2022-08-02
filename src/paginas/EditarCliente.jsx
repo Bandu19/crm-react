@@ -26,7 +26,7 @@ export const EditarCliente = () => {
          }
          setTimeout(() => {
             setCargando(!cargando);
-         }, 2000);
+         }, 1000);
       };
       obtenerClienteAPI();
    }, []);
@@ -34,7 +34,7 @@ export const EditarCliente = () => {
       <>
          <h1 className="font-black text-4xl text-blue-900">Editar Persona</h1>
          <p className="mt-3">Utiliza este formulario para editar datos de una Persona</p>
-         <Formulario persona={persona} />
+         <Formulario persona={persona} cargando={cargando} />
       </>
    );
 };
