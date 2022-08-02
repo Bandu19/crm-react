@@ -24,7 +24,7 @@ public class PersonaController {
     public List<Persona> getPersona(){
        return personaService.listarPersonas();
     }
-    // Yo lo hice
+
     @GetMapping("/getOne/{id}")
     public ResponseEntity<Persona> getPersonas(@PathVariable Integer id) {
         Persona obj = personaService.encontrarId(id);
@@ -36,7 +36,7 @@ public class PersonaController {
         Persona obj = personaService.guardarPersona(persona);
         return new ResponseEntity<Persona>(obj, HttpStatus.OK);
     }
-    // Yo lo hice
+
     @PutMapping("/updatePerson/{id}")
     public ResponseEntity<Persona> updatePerson(@PathVariable Integer id ,@RequestBody Persona persona) {
         Persona obj = personaService.guardarPersona(persona);
