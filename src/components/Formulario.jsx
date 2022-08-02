@@ -47,8 +47,8 @@ const Formulario = ({ persona, cargando }) => {
       try {
          let respuesta;
          if (persona.pcvepersona) {
+            // console.log(persona.pcvepersona + " EDITO");
             // Editando un nuevo registro
-            console.log(persona.pcvepersona + " EDITO");
             const url = `http://localhost:8080/Persona/updatePerson/${persona.pcvepersona}`;
             respuesta = await fetch(url, {
                method: "PUT",
@@ -58,7 +58,7 @@ const Formulario = ({ persona, cargando }) => {
                },
             });
          } else {
-            console.log("NUEVO");
+            // console.log("NUEVO");
             // Nuevo Registro
             const url = "http://localhost:8080/Persona/guardaPersona";
             respuesta = await fetch(url, {
@@ -92,7 +92,7 @@ const Formulario = ({ persona, cargando }) => {
 
             <Formik
                initialValues={{
-                  pcvepersona: persona?.pcvepersona ?? "",
+                  pcvepersona: persona?.pcvepersona ?? "", // vid-184.
                   pnombre: persona?.pnombre ?? "", // persona.pnombre ? persona.pnombre :  "";
                   papellidop: persona?.papellidop ?? "",
                   papellidom: persona?.papellidom ?? "",

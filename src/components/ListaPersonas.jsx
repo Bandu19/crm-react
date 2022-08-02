@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const ListaPersonas = ({ cliente }) => {
+export const ListaPersonas = ({ cliente, handleEliminar }) => {
    const navigate = useNavigate();
 
    // desestructuración del objeto
@@ -33,6 +33,7 @@ export const ListaPersonas = ({ cliente }) => {
             <button
                type="button"
                className="bg-red-600 hover:bg-red-700 block w-full text-white p-2 uppercase font-bold text-xs mt-3"
+               onClick={() => handleEliminar(pcvepersona)}
             >
                Eliminar
             </button>

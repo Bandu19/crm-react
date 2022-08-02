@@ -20,6 +20,30 @@ export const Inicio = () => {
       };
       obtenerPersonasAPI();
    }, []);
+
+   const handleEliminar = async (id) => {
+      // console.log("Eliminando...", id);
+      const confirmar = confirm("¿Deseas eliminar esta persona?");
+      if (confirmar) {
+         try {
+            const url = `http://localhost:8080/Persona/eliminarPersona/${id}`;
+            const respuesta = await fetch(url, {
+               method: "DELETE",
+            });
+
+            await respuesta.json();
+            const arrayPersonas = personas.filter((persona) => persona.pcvepersona !== id);
+
+            setPersonas(arrayPersonas);
+
+            // RECARGA AUTOMATICAMENTE una vez que aplica el link
+            // location.reload();
+         } catch (error) {
+            console.log(error);
+         }
+      }
+   };
+
    return (
       <>
          <h1 className="font-black text-4xl text-blue-900">Personas</h1>
@@ -40,7 +64,11 @@ export const Inicio = () => {
 
             <tbody>
                {personas.map((cliente) => (
-                  <ListaPersonas key={cliente.pcvepersona} cliente={cliente} />
+                  <ListaPersonas
+                     key={cliente.pcvepersona}
+                     cliente={cliente}
+                     handleEliminar={handleEliminar}
+                  />
                ))}
             </tbody>
          </table>
