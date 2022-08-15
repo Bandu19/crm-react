@@ -10,7 +10,7 @@ const Formulario = ({ persona, cargando }) => {
 
    const navigate = useNavigate();
 
-   // Utilizando Yup
+   // Utilizando Yu
    const nuevoClienteShema = Yup.object().shape({
       pnombre: Yup.string()
          .min(4, "El Nombre es muy corto")
